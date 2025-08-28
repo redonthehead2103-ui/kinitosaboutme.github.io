@@ -10,6 +10,7 @@
       font-family: "Courier New", monospace;
       text-align: center; 
       padding: 20px;
+      overflow: hidden; /* so particles don't make scrollbars */
     }
     h1 {
       font-size: 42px;
@@ -44,12 +45,30 @@
     button:hover {
       background: #00ffcc;
     }
+    /* Cursor trail particles */
+    .trail {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background: #00ffcc;
+      border-radius: 50%;
+      pointer-events: none;
+      opacity: 0.8;
+      box-shadow: 0 0 10px #00ffcc, 0 0 20px #ff00ff;
+      animation: fadeOut 0.8s forwards;
+    }
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        transform: scale(0);
+      }
+    }
   </style>
 </head>
 <body>
   <!-- Button gate -->
   <div id="gate">
-    <button onclick="enterSite()">Enter My about-me! (warning there is auto playying music) </button>
+    <button onclick="enterSite()">Enter My about-me! (warning: autoplaying music)</button>
   </div>
 
   <!-- Hidden content -->
@@ -78,6 +97,19 @@ i don’t bite, say hi XD</p>
       music.volume = 0.1; // set volume (0.0 = mute, 1.0 = full)
       music.play();
     }
+
+    // Cursor trail effect
+    document.addEventListener("mousemove", function(e) {
+      let trail = document.createElement("div");
+      trail.className = "trail";
+      document.body.appendChild(trail);
+      trail.style.left = (e.pageX - 5) + "px";
+      trail.style.top = (e.pageY - 5) + "px";
+
+      setTimeout(() => {
+        trail.remove();
+      }, 800); // matches fadeOut time
+    });
   </script>
 </body>
 </html>
