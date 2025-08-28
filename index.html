@@ -75,6 +75,14 @@ i don’t bite, say hi XD</p>
       document.getElementById("content").style.display = "block";
       document.getElementById("bgmusic").play();
     }
-  </script>
+  <script>
+  function enterSite() {
+    document.getElementById("gate").style.display = "none";
+    document.getElementById("content").style.display = "block";
+    const music = document.getElementById("bgmusic");
+    music.volume = 0.5; // 50% volume
+    music.play();
+  }
+</script>
 </body>
 </html>
