@@ -23,17 +23,54 @@
       height: 200px;
       object-fit: cover;
     }
+    #content {
+      display: none;
+      animation: fadeIn 1.5s ease-in-out forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    button {
+      background: #ff00ff;
+      border: none;
+      padding: 15px 30px;
+      font-size: 20px;
+      color: white;
+      cursor: pointer;
+      border-radius: 10px;
+      margin-top: 100px;
+    }
+    button:hover {
+      background: #00ffcc;
+    }
   </style>
 </head>
 <body>
-  <h1>Welcome to My Page</h1>
-  <img src="https://placekitten.com/200/200" alt="Profile Picture">
-  <p>This is my retro about me page with autoplaying music.</p>
+  <!-- Button gate -->
+  <div id="gate">
+    <button onclick="enterSite()">Enter My World</button>
+  </div>
 
-  <!-- Autoplaying MP3 -->
-  <audio autoplay loop controls>
+  <!-- Hidden content -->
+  <div id="content">
+    <h1>Welcome to My Page</h1>
+    <img src="https://placekitten.com/200/200" alt="Profile Picture">
+    <p>This is my retro about me page with music.</p>
+  </div>
+
+  <!-- Audio (starts only when button is clicked) -->
+  <audio id="bgmusic" loop>
     <source src="fps_cover.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
+
+  <script>
+    function enterSite() {
+      document.getElementById("gate").style.display = "none";
+      document.getElementById("content").style.display = "block";
+      document.getElementById("bgmusic").play();
+    }
+  </script>
 </body>
 </html>
